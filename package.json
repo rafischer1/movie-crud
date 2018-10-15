@@ -4,8 +4,8 @@
   "description": "### Make your own movie rating site.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "nodemon app.js"
+    "start": "node ./bin/www",
+    "test": "nodemon ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "knex": "^0.15.2",
     "mocha": "^5.2.0",

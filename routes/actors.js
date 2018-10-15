@@ -3,18 +3,17 @@ const router = express.Router()
 const knex = require('../knex')
 
 
-// READ ALL records for movies
+// READ ALL records for actors
 router.get('/', (req, res, next) => {
-  knex('movies')
+  knex('actors')
     .then(records => res.send(records))
 
 })
-
 // READ ONE record for this table
 router.get('/:id', (req, res, next) => {
 
   let id = req.params.id
-  knex('movies')
+  knex('actors')
     .where('id', id)
     .then(records => res.send(records))
 })
@@ -26,11 +25,11 @@ router.post('/', (req, res, next) => {
   // console.log(req.body.photo)
   //form validation goes here
   let newRecord = {
-    title: req.body.title,
-    release_date: req.body.release_date
+    name: req.body.name,
+    movie_id: req.body.movie_id
   }
 
-  knex('movies')
+  knex('actors')
     .insert(newRecord)
     .returning('*')
     .then((result) => {
@@ -40,26 +39,26 @@ router.post('/', (req, res, next) => {
       next(err)
     })
 })
+
 // UPDATE ONE record for this table
 router.put('/:id', (req, res, next) => {
   //using the given id look up if that records exists
   let id = req.params.id
-  knex('movies')
+  knex('actors')
     .where('id', id)
     .then(records => {
       //if found -- go ahead and UPDATE
       if (records.length > 0) {
         let updatedRecord = records[0]
-        if (req.body.title) {
-          updatedRecord.title = req.body.title
+        if (req.body.name) {
+          updatedRecord.name = req.body.name
         }
-        if (req.body.release_date) {
-          updatedRecord.release_date = req.body.release_date
+        if (req.body.movie_id) {
+          updatedRecord.movie_id = req.body.movie_id
         }
-
 
         //update record in db
-        knex('movies')
+        knex('actors')
           .where('id', req.params.id)
           .update(updatedRecord)
           .returning('*')
@@ -77,18 +76,20 @@ router.put('/:id', (req, res, next) => {
     })
 })
 
+
 // DELETE ONE record for this table
 router.delete('/:id', (req, res, next) => {
-  knex('movies')
+  knex('actors')
     .where('id', req.params.id)
     .first()
     .then((result) => {
       if (!result) next()
-      knex('movies')
+      knex('actors')
         .del()
         .where('id', req.params.id)
-        .then(() => {
-          res.send(`ID ${req.params.id} deleted!`)
+        .returning('*')
+        .then((result) => {
+          res.send(`ID ${req.params.id} deleted! ${result[0]}`)
         })
 
     })
@@ -96,3 +97,5 @@ router.delete('/:id', (req, res, next) => {
       next(err)
     })
 })
+
+module.exports = router
