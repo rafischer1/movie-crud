@@ -1,19 +1,23 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('cities').del()
+  return knex('movies').del()
     .then(function() {
       // Inserts seed entries
-      return knex('cities').insert([
-        { id: 1, name: "Barcelona" },
-        { id: 2, name: "Agan" },
-        { id: 3, name: "Rome" },
-        { id: 4, name: "Florence" },
-        { id: 5, name: "New York" }
+      return knex('movies').insert([
+        { id: 1, title: "Rescue Dawn", release_date: 2006 },
+        { id: 2, title: "Cobra Verde", release_date: 1987 },
+        { id: 3, title: "Fitzcarraldo", release_date: 1982 },
+        { id: 4, title: "Nosferatu the Vampyre", release_date: 1979 },
+        { id: 5, title: "The Enigma of Kaspar Hauser", release_date: 1974 },
+        { id: 6, title: "Bad Lieutenant: Port of Call New Orleans", release_date: 2009 },
+        { id: 7, title: "Stroszek", release_date: 1977 },
+        { id: 8, title: "Heart of Glass", release_date: 1976 },
+        { id: 9, title: "Woyzeck", release_date: 1979 }
       ]);
     })
     .then(() => {
       return knex.raw(
-        `SELECT setval('cities_id_seq', (SELECT MAX(id) from cities));`
+        `SELECT setval('movies_id_seq', (SELECT MAX(id) from movies));`
       )
     })
 }
