@@ -26,8 +26,7 @@ router.post('/', (req, res, next) => {
   //form validation goes here
   let newRecord = {
     name: req.body.name,
-    bio: req.body.bio,
-    photo: req.body.photo
+    movie_id: req.body.movie_id
   }
 
   knex('actors')
@@ -40,6 +39,7 @@ router.post('/', (req, res, next) => {
       next(err)
     })
 })
+
 // UPDATE ONE record for this table
 router.put('/:id', (req, res, next) => {
   //using the given id look up if that records exists
@@ -53,11 +53,8 @@ router.put('/:id', (req, res, next) => {
         if (req.body.name) {
           updatedRecord.name = req.body.name
         }
-        if (req.body.bio) {
-          updatedRecord.bio = req.body.bio
-        }
-        if (req.body.photo) {
-          updatedRecord.photo = req.body.photo
+        if (req.body.movie_id) {
+          updatedRecord.movie_id = req.body.movie_id
         }
 
         //update record in db
@@ -90,8 +87,9 @@ router.delete('/:id', (req, res, next) => {
       knex('actors')
         .del()
         .where('id', req.params.id)
-        .then(() => {
-          res.send(`ID ${req.params.id} deleted!`)
+        .returning('*')
+        .then((result) => {
+          res.send(`ID ${req.params.id} deleted! ${result[0]}`)
         })
 
     })

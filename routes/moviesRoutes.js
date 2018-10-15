@@ -9,6 +9,7 @@ router.get('/', (req, res, next) => {
     .then(records => res.send(records))
 
 })
+
 // READ ONE record for this table
 router.get('/:id', (req, res, next) => {
 
@@ -25,9 +26,8 @@ router.post('/', (req, res, next) => {
   // console.log(req.body.photo)
   //form validation goes here
   let newRecord = {
-    name: req.body.name,
-    bio: req.body.bio,
-    photo: req.body.photo
+    title: req.body.title,
+    release_date: req.body.release_date
   }
 
   knex('movies')
@@ -50,15 +50,13 @@ router.put('/:id', (req, res, next) => {
       //if found -- go ahead and UPDATE
       if (records.length > 0) {
         let updatedRecord = records[0]
-        if (req.body.name) {
-          updatedRecord.name = req.body.name
+        if (req.body.title) {
+          updatedRecord.title = req.body.title
         }
-        if (req.body.bio) {
-          updatedRecord.bio = req.body.bio
+        if (req.body.release_date) {
+          updatedRecord.release_date = req.body.release_date
         }
-        if (req.body.photo) {
-          updatedRecord.photo = req.body.photo
-        }
+
 
         //update record in db
         knex('movies')
@@ -78,7 +76,6 @@ router.put('/:id', (req, res, next) => {
       next(err)
     })
 })
-
 
 // DELETE ONE record for this table
 router.delete('/:id', (req, res, next) => {

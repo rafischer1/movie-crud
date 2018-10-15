@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
       return knex('actors').insert([
         { id: 1, name: "Klaus Kinski", movies_id: 2 },
         { id: 2, name: "Christian Bale", movies_id: 1 },
-        { id: 3, name: "Isabelle Adjani", movies_id: },
+        { id: 3, name: "Isabelle Adjani", movies_id: 4 },
         { id: 4, name: "Nicholas Cage", movies_id: 6 },
         { id: 5, name: "Bruno S", movies_id: 5 },
         { id: 6, name: "Josef Bierbichler", movies_id: 8 },

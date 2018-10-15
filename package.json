@@ -1,27 +1,32 @@
 {
   "name": "movie-crud",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "### Make your own movie rating site.",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rafischer1/movie-crud.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rafischer1/movie-crud/issues"
   },
   "homepage": "https://github.com/rafischer1/movie-crud#readme",
   "dependencies": {
     "chai": "^4.2.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "knex": "^0.15.2",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.4"
+    "morgan": "~1.9.0",
+    "nodemon": "^1.18.4",
+    "pg": "^7.5.0",
+    "pug": "2.0.0-beta11",
+    "sqlite3": "^4.0.2"
   }
 }

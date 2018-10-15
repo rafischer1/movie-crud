@@ -1,19 +1,27 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const port = process.env.PORT || 8000;
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var moviesRouter = require('./routes/movies');
-var actorsRouter = require('./routes/actors');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const moviesRouter = require('./routes/moviesRoutes');
+const actorsRouter = require('./routes/actorsRoutes');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(express.static('public'));
+
+app.use((req, res) => {
+  const filePath = path.join(__dirname, 'public', '404.html');
+  res.sendFile(filePath);
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -40,6 +48,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.listen(port, () => {
+  console.log('Listening on port', port);
 });
 
 module.exports = app;
