@@ -14,16 +14,17 @@ var app = express();
 // Allow CORS.
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("ccess-Control-Allow-Methods", "GET, PUT, POST, DELETE")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
 
-app.options('/', (res, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("ccess-Control-Allow-Methods", "GET, PUT, POST, DELETE")
-  res.status(200).send('Resource Updated')
-  next()
-})
+// app.options('/', (res, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*")
+//   res.header("ccess-Control-Allow-Methods", "GET, PUT, POST, DELETE")
+//   res.status(200).send('Resource Updated')
+//   next()
+// })
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
