@@ -63,6 +63,9 @@ router.put('/:id', (req, res, next) => {
         if (req.body.release_date) {
           updatedRecord.release_date = req.body.release_date
         }
+        if (req.body.photo) {
+          updatedRecord.photo = req.body.photo
+        }
 
 
         //update record in db
