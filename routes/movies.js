@@ -33,11 +33,12 @@ router.post('/', (req, res, next) => {
 
   let newRecord = {
     title: req.body.title,
-    release_date: req.body.release_date
-  }
-  if (req.body.photo) {
+    release_date: req.body.release_date,
     newRecord.photo = req.body.photo
   }
+  // if (req.body.photo) {
+  // 
+  // }
 
   knex('movies')
     .insert(newRecord)
