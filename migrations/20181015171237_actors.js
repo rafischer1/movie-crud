@@ -8,6 +8,6 @@ exports.up = function(knex, Promise) {
 }
 
 exports.down = function(knex, Promise) {
-  let dropQuery = `DROP TABLE movies`
+  let dropQuery = `DROP TABLE actors`
   return knex.raw(dropQuery)
 };
