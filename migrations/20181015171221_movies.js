@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary().notNullable()
     table.string('title').notNullable().defaultTo('')
     table.integer('release_date').notNullable()
-    table.string('photo')
+    table.string('photo').notNullable()
     table.timestamp('created_at').defaultTo(knex.fn.now()).notNullable()
     table.timestamp('updated_at').defaultTo(knex.fn.now()).notNullable()
 

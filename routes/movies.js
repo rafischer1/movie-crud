@@ -7,18 +7,21 @@ const knex = require('../knex')
 router.get('/', (req, res, next) => {
   knex('movies')
     .then(records => {
-      console.log(records[0])
       res.send(records)
     })
 })
 
 // READ ONE record for this table
 router.get('/:id', (req, res, next) => {
-
   let id = req.params.id
   knex('movies')
     .where('id', id)
-    .then(records => res.send(records))
+    .then(records => {
+      res.send(records)
+    })
+    .catch((err) => {
+      next(err)
+    })
 })
 
 // CREATE ONE record for this table
