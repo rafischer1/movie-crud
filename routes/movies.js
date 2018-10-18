@@ -30,9 +30,10 @@ router.post('/', (req, res, next) => {
   //need POST body data in order to create new creature IDEA: req.body 
   // console.log(req.body.photo)
   //form validation goes here
+  console.log(`req.body`, req.body)
   let newRecord = {
     title: req.body.title,
-    release_date: req.body.release_date
+    release_date: req.body.release_date,
     photo: req.body.photo
   }
 
